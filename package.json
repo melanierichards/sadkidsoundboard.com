@@ -1,0 +1,28 @@
+{
+  "name": "sadkidsoundboard.com",
+  "version": "1.0.0",
+  "description": "A soundbound of more constructive commentary",
+  "main": "script.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melanierichards/sadkidsoundboard.com.git"
+  },
+  "author": "Melanie Richards",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/melanierichards/sadkidsoundboard.com/issues"
+  },
+  "homepage": "https://github.com/melanierichards/sadkidsoundboard.com#readme"
+}

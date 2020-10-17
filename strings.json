@@ -1,0 +1,20 @@
+{
+  "buttonStrings": [
+    {
+      "label": "I’ll never be good enough",
+      "speech": "You’re not done growing"
+    },
+    {
+      "label": "I suck",
+      "speech": "You don’t give yourself enough credit"
+    },
+    {
+      "label": "I can’t get through this",
+      "speech": "You’ve done this before and you can do it again"
+    },
+    {
+      "label": "No one cares about me",
+      "speech": "You will never know just how much you are loved"
+    }
+  ]
+}
