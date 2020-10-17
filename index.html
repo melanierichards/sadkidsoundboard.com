@@ -41,6 +41,7 @@
 
   <body>
     <main role="main">
+
       <h1>Sad Kid Soundboard</h1>
       <section aria-labelledby="heading-soundboard">
         <h2 id="heading-soundboard" class="u-vis-hidden">Soundboard</h2>
@@ -50,6 +51,22 @@
           </noscript>
         </div>
       </section>
+
+      <section aria-labelledby="heading-settings">
+        <details class="settings">
+          <summary>
+            <h2 id="heading-settings">Settings</h2>
+          </summary>
+          <div class="settings__content">
+            <p>Your settings will be remembered for next time, unless you choose to clear site data in your browser.</p>
+            <h3>Playback</h3>
+            <label for="voices">Soundboard voice</label>
+            <select id="voices" aria-describedby="voicesTip"></select>
+            <p id="voicesTip" class="settings__tip">I’d recommend one of the “natural” voices, <a href="https://blogs.windows.com/msedgedev/2019/08/14/cloud-powered-voices-microsoft-edge-chromium/">available if you use Microsoft Edge</a></p>
+          </div>
+        </details>
+      </section>
+
     </main>
     <footer role="contentinfo">
       <p>Made by <a href="https://melanie-richards.com">Melanie Richards</a> | <a href="https://github.com/melanierichards/sadkidsoundboard.com">Code on Github</a></p>
