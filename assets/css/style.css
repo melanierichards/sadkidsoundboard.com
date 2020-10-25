@@ -1,0 +1,73 @@
+/*
+ *  =============================================
+ *  GLOBALS
+ *  =============================================
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 2em;
+  max-width: 48em;
+}
+
+label {
+  display: block;
+}
+
+/*
+ *  =============================================
+ *  SOUNDBOARD
+ *  =============================================
+ */
+
+/*
+ *  ---------------------------------------------
+ *  CAPTIONS
+ *  ---------------------------------------------
+ */
+
+#captionsStore {
+  position: fixed;
+  top: 2em;
+  left: 0;
+  padding: 2rem;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+#captionsStore[data-pos="bottom"] {
+  top: auto;
+  bottom: 2em;
+}
+
+.c-caption {
+  display: inline-block;
+  padding: .5em;
+  background: #000;
+  color: #fff;
+  font-size: 1.5em;
+  pointer-events: auto;
+}
+
+/*
+ *  =============================================
+ *  SETTINGS
+ *  =============================================
+ */
+
+.settings {
+  margin-top: 2em;
+}
+
+#heading-settings {
+  display: inline;
+}
+
+.settings__additional-caption {
+  display: none;
+}

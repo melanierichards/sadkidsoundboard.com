@@ -37,6 +37,7 @@
     <meta name="twitter:image:src" content="/assets/images/favicon-192.png">
     <meta name="twitter:image:alt" content="">
     -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
   </head>
 
   <body>
@@ -52,6 +53,8 @@
         </div>
       </section>
 
+      <div id="captionsStore" aria-hidden="true" data-pos="bottom"></div>
+
       <section aria-labelledby="heading-settings">
         <details class="settings">
           <summary>
@@ -60,9 +63,31 @@
           <div class="settings__content">
             <p>Your settings will be remembered for next time, unless you choose to clear site data in your browser.</p>
             <h3>Playback</h3>
-            <label for="voices">Soundboard voice</label>
-            <select id="voices" aria-describedby="voicesTip"></select>
-            <p id="voicesTip" class="settings__tip">I’d recommend one of the “natural” voices, <a href="https://blogs.windows.com/msedgedev/2019/08/14/cloud-powered-voices-microsoft-edge-chromium/">available if you use Microsoft Edge</a></p>
+            <div class="settings__setting">
+              <label for="voices">Soundboard voice</label>
+              <select id="voices" aria-describedby="voicesTip"></select>
+              <p id="voicesTip" class="settings__tip">I’d recommend one of the “natural” voices, <a href="https://blogs.windows.com/msedgedev/2019/08/14/cloud-powered-voices-microsoft-edge-chromium/">available if you use Microsoft Edge</a></p>
+            </div>
+            <h3>Captions</h3>
+            <label class="settings__setting">
+              <input id="showCaptions" type="checkbox" />
+              Show captions for soundboard output
+            </label>
+            <div class="settings__setting settings__additional-caption">
+              <p>Display captions…</p>
+              <label>
+                <input id="captionPosTop" value="top" type="radio" name="captionPos" />
+                At the top of the window
+              </label>
+              <label>
+                <input id="captionPosBottom" value="bottom" type="radio" name="captionPos" />
+                At the bottom of the window
+              </label>
+            </div>
+            <div class="settings__setting settings__additional-caption">
+              <label for="captionTime">Hide caption after</label>
+              <input id="captionTime" aria-describedby="seconds" type="number" value="20" min="1" /> <span id="seconds">seconds</span>
+            </div>
           </div>
         </details>
       </section>

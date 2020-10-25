@@ -4,7 +4,14 @@
  *  =============================================
  */
 
+const captionsStoreEl = document.getElementById('captionsStore');
+
 const voicesEl = document.getElementById('voices');
+const captionsEl = document.getElementById('showCaptions');
+const additionalCaptionEls = document.querySelectorAll('.settings__additional-caption');
+const captionPosEls = document.querySelectorAll('input[name="captionPos"]');
+const captionTimeEl = document.getElementById('captionTime');
+
 const settingValueVoice = localStorage.getItem('setting-voice');
 
 /*
@@ -14,6 +21,7 @@ const settingValueVoice = localStorage.getItem('setting-voice');
  */
 
 /*
+ *  ---------------------------------------------
  *  RETRIEVE STRINGS
  *  ---------------------------------------------
  */
@@ -31,6 +39,7 @@ requestStrings.onload = function() {
 }
 
 /*
+ *  ---------------------------------------------
  *  CREATE BUTTONS
  *  ---------------------------------------------
  */
@@ -57,6 +66,7 @@ const createButtons = function(stringFile) {
  */
 
 /*
+ *  ---------------------------------------------
  *  PLAY SOUND
  *  ---------------------------------------------
  */
@@ -66,6 +76,7 @@ const playSound = function(e) {
   const speechify = new SpeechSynthesisUtterance(speechString);
   const voiceOptions = window.speechSynthesis.getVoices();
   const selectedVoice = voicesEl.selectedOptions[0].getAttribute('data-name');
+  const settingValueCaptions = localStorage.getItem('setting-captions');
 
   for (let i = 0; i < voiceOptions.length; i++) {
     if (voiceOptions[i].name === selectedVoice) {
@@ -73,7 +84,37 @@ const playSound = function(e) {
     }
   }
 
+  // Speak the string
   speechSynthesis.speak(speechify);
+
+  // Show caption if applicable
+  if (settingValueCaptions && settingValueCaptions === 'true') {
+    showCaption(speechString);
+  }
+};
+
+/*
+ *  ---------------------------------------------
+ *  SHOW CAPTION
+ *  ---------------------------------------------
+ */
+
+const showCaption = function(captionText) {
+  const settingValueCaptionTime = localStorage.getItem('setting-caption-time');
+  const caption = document.createElement('p');
+  caption.classList.add('c-caption');
+  caption.textContent = captionText;
+
+  if (captionsStoreEl.firstChild) {
+    captionsStoreEl.firstChild.remove();
+  }
+  captionsStoreEl.appendChild(caption);
+
+  setTimeout(() => {
+    caption.remove();
+  }, parseInt(settingValueCaptionTime) * 100);
+
+  console.log(parseInt(settingValueCaptionTime) * 100);
 };
 
 /*
@@ -83,6 +124,7 @@ const playSound = function(e) {
  */
 
 /*
+ *  ---------------------------------------------
  *  SETTING: VOICE
  *  ---------------------------------------------
  */
@@ -125,3 +167,82 @@ const storeVoiceSetting = function() {
 };
 
 voicesEl.addEventListener('change', storeVoiceSetting);
+
+/*
+ *  ---------------------------------------------
+ *  SETTING: CAPTIONS
+ *  ---------------------------------------------
+ */
+
+const showAdditionalCaptionSettings = function() {
+  additionalCaptionEls.forEach(function(setting) {
+    setting.style.display = 'block';
+  });
+};
+
+const hideAdditionalCaptionSettings = function() {
+  additionalCaptionEls.forEach(function(setting) {
+    setting.style.display = 'block';
+  });
+};
+
+// Set up caption settings on page load
+const setUpCaptionSettings = function() {
+  const settingValueCaptions = localStorage.getItem('setting-captions');
+  const settingValueCaptionPos = localStorage.getItem('setting-caption-pos');
+  const settingValueCaptionTime = localStorage.getItem('setting-caption-time');
+
+  if (settingValueCaptions === 'true') {
+    captionsEl.checked = true;
+    showAdditionalCaptionSettings();
+  }
+
+  if (settingValueCaptionPos) {
+    document.querySelector('input[value="' + settingValueCaptionPos + '"]').checked = true;
+    captionsStoreEl.setAttribute('data-pos', settingValueCaptionPos);
+  } else {
+    document.getElementById('captionPosBottom').checked = true;
+  }
+  
+  if (settingValueCaptionTime) {
+    captionTimeEl.value = settingValueCaptionTime;
+  } else {
+    localStorage.setItem('setting-caption-time', captionTimeEl.value);
+  }
+};
+
+setUpCaptionSettings();
+
+// Toggle captions on/off
+const toggleCaptionSettings = function(e) {
+  if (e.target.checked) {
+    localStorage.setItem('setting-captions', 'true');
+    showAdditionalCaptionSettings();
+  } else {
+    localStorage.setItem('setting-captions', 'false');
+    hideAdditionalCaptionSettings();
+  }
+};
+
+captionsEl.addEventListener('change', toggleCaptionSettings);
+
+// Change caption position
+const changeCaptionPos = function(e) {
+  if (e.target.checked) {
+    localStorage.setItem('setting-caption-pos', e.target.value);
+    captionsStoreEl.setAttribute('data-pos', e.target.value);
+  }
+};
+
+captionPosEls.forEach(function(e) {
+  e.addEventListener('change', changeCaptionPos);
+});
+
+// Change caption timeout
+const changeCaptionTime = function(e) {
+  if (e.target.value !== '') {
+    localStorage.setItem('setting-caption-time', captionTimeEl.value);
+  }
+}
+
+captionTimeEl.addEventListener('change', changeCaptionTime);
